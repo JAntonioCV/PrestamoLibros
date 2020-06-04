@@ -1,0 +1,72 @@
+﻿@model PrestamoLibros.Models.AlquilerDeLibro
+
+@{
+    ViewBag.Title = "Eliminación";
+}
+
+<h2>Eliminar</h2>
+
+<h3>Está seguro que desea borrar este registro?</h3>
+<div>
+    <h4>Prestamo</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.Label("Cliente")
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Cliente.NombreCompleto)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CodigoAlquiler)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CodigoAlquiler)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CopiaDeLibro.Libro.TituloDeLibro)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CopiaDeLibro.Libro.TituloDeLibro)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CopiaDeLibro.NumeroCopia)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CopiaDeLibro.NumeroCopia)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FechaAlquiler)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FechaAlquiler)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FechaRealDevolucion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FechaRealDevolucion)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Eliminar" class="btn btn-default" /> |
+            @Html.ActionLink("Regresar atras", "Index", new { CodE = Model.Cliente.CodigoDeCliente })
+        </div>
+    }
+</div>

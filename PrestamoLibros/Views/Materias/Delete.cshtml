@@ -1,0 +1,41 @@
+﻿@model PrestamoLibros.Models.Materia
+
+@{
+    ViewBag.Title = " Eliminar";
+}
+
+<h2>Eliminar Materia</h2>
+
+<h3>¿Esta seguro que desea eliminar esta materia?</h3>
+<div>
+    <h4>Materia</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.CodigoDeMateria)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CodigoDeMateria)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DescripcionDeMateria)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DescripcionDeMateria)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Eliminar" class="btn btn-default" /> |
+            @Html.ActionLink("Regresar a la Lista", "Index")
+        </div>
+        <h4>@ViewBag.Error</h4>
+    }
+</div>

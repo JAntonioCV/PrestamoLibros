@@ -1,0 +1,49 @@
+﻿@model PrestamoLibros.Models.Cliente
+
+@{
+    ViewBag.Title = "Eliminar";
+}
+
+<h2>Eliminar Cliente</h2>
+
+<h3>¿Esta seguro que desea eliminar este cliente?</h3>
+<div>
+    <h4>Cliente</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.CodigoDeCliente)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CodigoDeCliente)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NombresDelCliente)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NombresDelCliente)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ApellidosDelCliente)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ApellidosDelCliente)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Eliminar" class="btn btn-default" /> |
+            @Html.ActionLink("Regresar a la lista", "Index")
+        </div>
+        <h4>@ViewBag.Error</h4>
+    }
+</div>

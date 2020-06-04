@@ -1,0 +1,34 @@
+﻿@using ReportViewerForMvc;
+@{
+    ViewBag.Title = "Control de Clientes";
+}
+
+@using (Html.BeginForm())
+{
+    <div class="col-md-offset-3">
+
+        <h2>Lista de prestamos por cliente</h2>
+        <br />
+        <div class="row">
+            <div class="col-md-4">
+                @Html.Label("Mes")
+                @Html.TextBox("Desde", "", new { @class = "calendario" })
+            </div>
+            <div class="row">
+                <div class="col-md-offset-1">
+                    <input type="submit" id="cargar" class="btn btn-default" value="Consultar" data-toggle="tooltip" title="Cargar los prestamos mensuales" />
+                </div>
+            </div>
+        </div>
+        <br /><br />
+        @if (ViewBag.rpt != null)
+        {
+            @Html.ReportViewer(ViewBag.rpt as Microsoft.Reporting.WebForms.ReportViewer, new { @Style = "Width:70%;height:100%;" })
+        }
+    </div>
+}
+
+@section Scripts{
+    @Scripts.Render("~/bundles/prestamo");
+    @Scripts.Render("~/bundles/jqueryval");
+}

@@ -1,0 +1,15 @@
+﻿
+@{
+    ViewBag.Title = "BuscarCliente";
+}
+
+<h2>Busqueda</h2>
+
+<div id="VistaParcial">
+    @Html.Action("Busqueda","Clientes")
+</div>
+
+@section Scripts{
+    @Scripts.Render("~/bundles/Busqueda");
+    @Scripts.Render("~/bundles/jqueryval");
+}

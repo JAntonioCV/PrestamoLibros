@@ -1,0 +1,65 @@
+﻿@model IEnumerable<PrestamoLibros.Models.Cliente>
+
+@{
+    WebGrid eGrd = new WebGrid(Model, canPage: true, rowsPerPage: 10, ajaxUpdateContainerId: "bdvGrid", canSort: false);
+}
+
+<div class="form-horizontal">
+    <h2>Búsqueda de Cliente</h2>
+
+    <div class="row">
+        <div class="col-md-4">
+            @Html.Label("Nombres:")
+        </div>
+        <div class="col-md-4">
+            @Html.TextBox("Nombres", null, new { id = "bNombres" })
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            @Html.Label("Apellido:")
+        </div>
+        <div class="col-md-4">
+            @Html.TextBox("Apellido1", null, new { id = "bApellido1" })
+        </div>
+    </div>
+
+    <br />
+    <div class="row">
+        <div class="col-md-4">
+            @Ajax.ActionLink("Buscar", "Busqueda", "Clientes", new { Nombres = "_Nom_", Apellido1 = "_Ape1_"}, new AjaxOptions { UpdateTargetId = "VistaParcial", HttpMethod = "Get", InsertionMode = InsertionMode.Replace }, new { @class = "btn btn-default", id = "linkBuscarCli", onclick = "btnBuscarCli();" })
+        </div>
+        <div class="col-md-4">
+            @Html.TextBox("CliSeleccionado", null, new { id = "CliSeleccionado", disabled = "disabled" })
+        </div>
+    </div>
+    <br />
+    <div class="row" id="bdvGrid">
+        @eGrd.GetHtml(
+             headerStyle: "webgrid-header",
+             htmlAttributes: new { id = "bGrid" },
+             fillEmptyRows: true,
+             rowStyle: "webgrid-row",
+             footerStyle: "webgrid-footer",
+             tableStyle: "webgrid-table",
+             mode: WebGridPagerModes.All,
+             firstText: "<<",
+             previousText: "<",
+             nextText: ">",
+             lastText: ">>",
+             columns: eGrd.Columns(
+                 eGrd.Column(header: "Elección", format:@<text><a href="#" onclick="SeleccionarCli(@item.CodigoDeCliente);">Seleccionar</a></text>),
+                 eGrd.Column(columnName: "CodigoDeCliente", header: "Codigo"),
+                 eGrd.Column(columnName: "NombresDelCliente", header: "Nomvres"),
+                 eGrd.Column(columnName: "ApellidosDelCliente", header: "Apellidos"),
+
+                 eGrd.Column(header: "Acciones", format:@<text>
+                    @Html.ActionLink(" ", "details", new { id = @item.Id }, new { @class = "glyphicon glyphicon-file" })
+                    @Html.ActionLink(" ", "Edit", new { id = @item.Id }, new { @class = "glyphicon glyphicon-pencil" })
+                    @Html.ActionLink(" ", "delete", new { id = @item.Id }, new { @class = "glyphicon glyphicon-trash" })
+                </text>)
+                 ))
+    </div>
+
+</div>
+

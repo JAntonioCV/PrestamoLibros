@@ -1,0 +1,41 @@
+﻿@model PrestamoLibros.Models.CopiaDeLibro
+
+@{
+    ViewBag.Title = "Eliminar";
+}
+
+<h2>Eliminar Copia</h2>
+
+<h3>¿Esta seguro que desea eliminar esta copia?</h3>
+<div>
+    <h4>Copia De Libro</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Libro.CodigoDeLibro)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Libro.CodigoDeLibro)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NumeroCopia)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NumeroCopia)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Eliminar" class="btn btn-default" /> |
+            @Html.ActionLink("Regresar a la lista", "Index")
+        </div>
+        <h4>@ViewBag.Error</h4>
+    }
+</div>

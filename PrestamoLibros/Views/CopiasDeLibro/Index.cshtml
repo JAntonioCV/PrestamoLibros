@@ -1,0 +1,29 @@
+﻿@model IEnumerable<PrestamoLibros.Models.CopiaDeLibro>
+
+@{
+    ViewBag.Title = "Lista";
+    WebGrid OGrd = new WebGrid(Model,rowsPerPage:10,canPage: true);
+}
+
+<h2>Lista de Copias</h2>
+
+<p>
+    @Html.ActionLink("Agregar Registro", "Create")
+</p>
+@OGrd.GetHtml(
+    headerStyle: "webgrid-header",
+    rowStyle: "webgrid-row",
+    footerStyle: "webgrid-footer",
+    tableStyle: "webgrid-table",
+    fillEmptyRows: false,
+    columns: OGrd.Columns(
+        OGrd.Column(columnName: "NumeroCopia", header: "Numero de copia"),
+        OGrd.Column(columnName: "Libro.TituloDeLibro",header:"Titulo"),
+
+        OGrd.Column(header: "Acciones", format:@<Text>
+        @Html.ActionLink(" ", "Edit", new { id = @item.Id }, new { @class = "glyphicon glyphicon-pencil" })|
+        @Html.ActionLink(" ", "details", new { id = @item.Id }, new { @class = "glyphicon glyphicon-file" })|
+        @Html.ActionLink(" ", "delete", new { id = @item.Id }, new { @class = "glyphicon glyphicon-trash" })
+        </Text>)
+        )
+    )

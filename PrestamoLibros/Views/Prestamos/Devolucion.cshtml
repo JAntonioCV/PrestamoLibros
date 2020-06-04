@@ -1,0 +1,91 @@
+﻿@model IEnumerable<PrestamoLibros.Models.AlquilerDeLibro>
+@{
+    ViewBag.Title = "Lista";
+    WebGrid oGrid = new WebGrid(null, rowsPerPage: 5, canPage: true);
+    oGrid.Bind(Model, rowCount: Model.Count());
+    List<PrestamoLibros.Models.Cliente> datos = new List<PrestamoLibros.Models.Cliente>();
+}
+@using (Html.BeginForm("Devolucion", "Prestamos", FormMethod.Get))
+{
+    <div class="col-md-offset-3">
+
+        <h2>Devolución de Alquiler de Prestamos</h2>
+        <br />
+        <div class="row">
+            <div class="col-md-6">
+                @Html.Label("Codigo:")
+                @Html.TextBox("CodE")
+                <button type="button" id="btnBuscar" class="btn btn-primary" title="Búscar Cliente" data-toggle="modal" data-target="#bModal">
+                    <spam class="glyphicon glyphicon-search"> Búscar</spam>
+                </button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-offset-1">
+                <input type="submit" id="cargar" class="btn btn-default" value="Cargar" data-toggle="tooltip" title="Cargar los alquileres del cliente" />
+            </div>
+        </div>
+        <br /><br />
+        <div class="row">
+            <br />
+            <div class="col-md-4">
+                <span id="NombCompleto">@ViewBag.NombCompleto</span>
+            </div>
+        </div>
+
+        <div id="GrdCred">
+            @oGrid.GetHtml(
+     headerStyle: "webgrid-header",
+     htmlAttributes: new { id = "oGrid" },
+            tableStyle: "webgrid-table",
+     rowStyle: "webgrid-row",
+     fillEmptyRows: true,
+     footerStyle: "webgrid-footer",
+     mode: WebGridPagerModes.All,
+     firstText: "Primero",
+     nextText: "Siguiente",
+     previousText: "Anterior",
+     lastText: "último",
+     columns: oGrid.Columns(
+     oGrid.Column(columnName: "CodigoAlquiler", header: "Codigo de Alquiler"),
+     oGrid.Column(columnName: "FechaAlquiler", header: "Fecha de prestamo", format: (item) => item.FechaAlquiler.ToString("dd MMM yyyy"), canSort: true),
+     oGrid.Column(columnName: "FechaRealDevolucion", header: "Fecha de devolucion", format: (item) => item.FechaRealDevolucion.ToString("dd MMM yyyy"), canSort: true),
+     oGrid.Column(columnName: "CopiaDeLibro.Libro.TituloDeLibro", header: "Titulo"),
+     oGrid.Column(columnName: "CopiaDeLibro.NumeroCopia", header: "Numero de Copia"),
+     oGrid.Column(header: "Devolver", format:@<text>
+        @Html.ActionLink(" ", "EditDev", new { id = @item.Id }, new { @class = "glyphicon glyphicon-pencil" })
+    </text>)
+ ))
+        </div>
+    </div>
+
+    <div class="modal fade" id="bModal" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="etiqueta">TITULO</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div id="VistaParcial">
+                        @Html.Action("Busqueda", "Clientes")
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-primary" id="btnAceptarBus" disabled="disabled" onclick="AceptarBusClick();">Aceptar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+}
+
+@section Scripts{
+    @Scripts.Render("~/bundles/prestamo")
+    @Scripts.Render("~/bundles/Busqueda")
+    @Scripts.Render("~/bundles/jqueryval");
+
+}

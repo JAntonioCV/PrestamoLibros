@@ -1,0 +1,42 @@
+﻿@model PrestamoLibros.Models.Cliente
+
+@{
+    ViewBag.Title = "Detalles";
+}
+
+<h2>Detalles de Cliente</h2>
+
+<div>
+    <h4>Cliente</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.CodigoDeCliente)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CodigoDeCliente)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NombresDelCliente)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NombresDelCliente)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ApellidosDelCliente)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ApellidosDelCliente)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Editar", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Regresar a la lista", "Index")
+</p>

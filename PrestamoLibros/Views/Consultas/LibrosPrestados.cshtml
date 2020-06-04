@@ -1,0 +1,117 @@
+﻿@model IEnumerable<PrestamoLibros.Models.Extension.cLstAlquiler>
+
+@{
+    ViewBag.Title = "Consultas";
+    WebGrid oGrid = new WebGrid(null, rowsPerPage: 10, canPage: true);
+
+    oGrid.Bind(Model, rowCount: Model.Count());
+    //ViewBag.Total = Model.Sum(m => m.Monto);
+
+}
+
+
+@using (Html.BeginForm())
+{
+    <div class="col-md-offset-3">
+
+        <h2>Consulta de Alquileres Prestados</h2>
+        <br />
+        <div class="row">
+            <div class="col-md-4">
+                @Html.Label("Codigo:")
+                @Html.TextBox("CodE")
+                <button type="button" id="btnBuscar" class="btn btn-primary" title="Búscar Cliente" data-toggle="modal" data-target="#bModal">
+                    <spam class="glyphicon glyphicon-search"> </spam>
+                </button>
+            </div>
+            <div class="col-md-4">
+                @Html.Label("Desde")
+                @Html.TextBox("Desde", "", new { @class = "calendario" })
+            </div>
+            <div class="col-md-4">
+                @Html.Label("Hata")
+                @Html.TextBox("Hasta", "", new { @class = "calendario" })
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-offset-1">
+                <input type="submit" id="cargar" class="btn btn-default" value="Consultar" data-toggle="tooltip" title="Cargar los prestamos del Codigo" />
+                @if (ViewBag.idCli > 0 && ViewBag.hasta != "1900/01/01")
+                {
+                    <a target="_blank" href="@Url.Action("RptLibrosPrestados", "Informes", new { idCli = ViewBag.idCli, Desde = ViewBag.desde, Hasta = ViewBag.hasta, Nombre = ViewBag.Nombre})" class="btn btn-info">Ver Reporte</a>
+                }
+            </div>
+        </div>
+        <br /><br />
+
+        @*<div class="row">
+            <br />
+            <div class="col-md-4">
+                <span id="NombCompleto">@ViewBag.NombCompleto</span>
+            </div>
+        </div>*@
+
+        <div id="GrdCred">
+          @oGrid.GetHtml(
+     headerStyle: "webgrid-header",
+     htmlAttributes: new { id = "oGrid" },
+     tableStyle: "webgrid-table",
+     rowStyle: "webgrid-row",
+     fillEmptyRows: true,
+     footerStyle: "webgrid-footer",
+     mode: WebGridPagerModes.All,
+     firstText: "Primero",
+     nextText: "Siguiente",
+     previousText: "Anterior",
+     lastText: "último",
+     columns: oGrid.Columns(
+     oGrid.Column(columnName: "Codigo", header: "Codigo de Alquiler"),
+     oGrid.Column(columnName: "Fecha_Alquiler", header: "Fecha de prestamo", format: (item) => item.Fecha_Alquiler.ToString("dd MMM yyyy"), canSort: true),
+     oGrid.Column(columnName: "Fecha_Devolucion", header: "Fecha", format: (item) => item.Fecha_Devolucion.ToString("dd MMM yyyy"), canSort: true),
+     oGrid.Column(columnName: "Titulo", header: "Titulo"),
+     oGrid.Column(columnName: "Numero_Copia", header: "Numero de Copia")
+
+ ))
+        </div>
+    </div>
+
+
+    @*<div class="row">
+        <div class="col-md-offset-6">
+            @if (ViewBag.Total > 0)
+            {
+                <input type="text" value="Total... @ViewBag.Total" style="text-align:right;" readonly="readonly" />
+            }
+        </div>
+    </div>*@
+
+
+    <div class="modal fade" id="bModal" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="etiqueta">TITULO</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div id="VistaParcial">
+                        @Html.Action("Busqueda", "Clientes")
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-primary" id="btnAceptarBus" disabled="disabled" onclick="AceptarBusClick();">Aceptar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+}
+
+@section Scripts{
+    @Scripts.Render("~/bundles/prestamo");
+    @Scripts.Render("~/bundles/Busqueda");
+    @Scripts.Render("~/bundles/jqueryval");
+}

@@ -1,0 +1,66 @@
+﻿@model PrestamoLibros.Models.AlquilerDeLibro
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Detalles</h2>
+
+<div>
+    <h4>Alquileres</h4>
+    <hr />
+    <dl class="dl-horizontal">
+
+        <dt>
+            @Html.Label("Cliente")
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Cliente.NombreCompleto,"Cliente")
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CodigoAlquiler)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CodigoAlquiler)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CopiaDeLibro.Libro.TituloDeLibro)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CopiaDeLibro.Libro.TituloDeLibro)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CopiaDeLibro.NumeroCopia)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CopiaDeLibro.NumeroCopia)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FechaAlquiler)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FechaAlquiler)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FechaRealDevolucion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FechaRealDevolucion)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Editar", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Regresar", "Index", new { CodE = Model.Cliente.CodigoDeCliente})
+</p>

@@ -1,0 +1,65 @@
+﻿@model PrestamoLibros.Models.Libro
+
+@{
+    ViewBag.Title = "Eliminar";
+}
+
+<h2>Eliminar libro</h2>
+
+<h3>¿Esta seguro de eliminar este libro?</h3>
+<div>
+    <h4>Libro</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Materia.CodigoDeMateria)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Materia.CodigoDeMateria)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CodigoDeLibro)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CodigoDeLibro)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TituloDeLibro)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TituloDeLibro)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ISBN)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ISBN)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Autor)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Autor)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Eliminar" class="btn btn-default" /> |
+            @Html.ActionLink("Regresar a la lista", "Index")
+        </div>
+        <h4>@ViewBag.Error</h4>
+    }
+</div>

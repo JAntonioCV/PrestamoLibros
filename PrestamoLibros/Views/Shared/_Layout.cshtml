@@ -1,0 +1,91 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Mi aplicación ASP.NET</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <//
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>
+                        @Html.ActionLink("Inicio", "Index", "Home")
+                    </li>
+                    <li>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Movimientos<spam class="caret"></spam></a>
+                        <ul class="dropdown-menu">
+                            <li> @Html.ActionLink("Prestamos de libros", "Index", "Prestamos") </li>
+                            <li> @Html.ActionLink("Devolucion de libros", "Devolucion", "Prestamos") </li>
+                        </ul>
+
+                    </li>
+
+                    <li>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Catalogos<spam class="caret"></spam></a>
+                        <ul class="dropdown-menu">
+                            <li> @Html.ActionLink("Clientes", "Index", "Clientes") </li>
+                            <li> @Html.ActionLink("Materias", "Index", "Materias") </li>
+                            <li> @Html.ActionLink("Copias de Libro", "Index", "CopiasDeLibro") </li>
+                            <li> @Html.ActionLink("Libros", "Index", "Libros") </li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Consultas<spam class="caret"></spam></a>
+                        <ul class="dropdown-menu">
+                            <li> @Html.ActionLink("Busqueda de Libros", "BuscarLibro", "Consultas") </li>
+                            <li> @Html.ActionLink("Busqueda de Clientes", "BuscarClientes", "Consultas") </li>
+                            <li> @Html.ActionLink("Consulta de Alquileres", "LibrosPrestados", "Consultas") </li>
+                           
+                        </ul>
+
+                    </li>
+
+                    <li>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Informes<spam class="caret"></spam></a>
+                        <ul class="dropdown-menu">
+                            <li> @Html.ActionLink("Devoluciones Pendiente", "RptAlquileresPendientes", "Informes") </li>
+                            <li class="dropdown-submenu">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Reportes</a>
+                                <ul class="dropdown-menu">
+                                    <li> @Html.ActionLink("Reporte de Alquileres Mensual", "RptAlquilerMensual", "Informes") </li>
+                                    <li> @Html.ActionLink("Reportes de Prestamos de libro", "RptLibrosAlquilados", "Informes") </li>
+                                    <li> @Html.ActionLink("Reporte de Visitas Cliente", "RptVisitasClientes", "Informes") </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Seguridad<spam class="caret"></spam></a>
+                        <ul class="dropdown-menu">
+                            <li>@Html.ActionLink("Usuarios", "Register", "Account")</li>
+                            <li>@Html.ActionLink("Funciones/Roles", "About", "Home")</li>
+                            <li>@Html.ActionLink("Asignación de Roles", "About", "Home")</li>
+                        </ul>
+                    </li>
+                </ul>
+                @Html.Partial("_LoginPartial")
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - Mi aplicación ASP.NET</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>
